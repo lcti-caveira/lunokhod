@@ -5,4 +5,3 @@ def handle_response(message) -> str:
         return "What's up!"
     if p_message == '!help':
         return "Just say hello"
-    return "I can't understand that..."
