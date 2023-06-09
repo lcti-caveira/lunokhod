@@ -25,7 +25,8 @@ def github_payload():
             if payload['commits'][0]['distinct']:
                 try:
                     gitdir = os.environ['GIT_DIR']
-                    cmd_output = subprocess.check_output(['git', f'--git-dir={gitdir}', 'pull', 'origin', 'main'])
+                    cmd_output = subprocess.check_output(
+                        ['git', f'--git-dir={gitdir}/.git', f'--work-tree={gitdir}', 'pull', 'origin', 'main'])
                     subprocess.check_output(['systemctl', 'restart', 'discord-bot.service'])
                     return jsonify({'msg': str(cmd_output)})
                 except subprocess.CalledProcessError as error:
