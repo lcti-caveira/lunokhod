@@ -15,9 +15,10 @@ This is a simple Discord bot written in Python that utilizes the `discord` libra
 
 ## Code Explanation
 ### Importing Required Libraries
+
 ```python
 import discord
-import responses
+from source import responses
 import os
 ```
 The necessary libraries are imported. discord is the library that provides the functionality to interact with the Discord API. responses contains the logic for handling user messages and generating appropriate responses. os is used to retrieve the Discord bot token from the environment variable.
