@@ -1,7 +1,7 @@
 # Discord Bot Documentation
 
 ## Overview
-This is a simple Discord bot written in Python that utilizes the `discord` library. The bot listens for incoming messages in Discord channels and responds to them based on predefined rules using the `responses.py` module.
+This is a simple Discord bot written in Python that utilizes the `discord` library. The bot listens for incoming messages in Discord channels and responds to them based on predefined rules using the [responses.py](./source/responses.py) module.
 
 ## Prerequisites
 - Python 3.x installed on your system.
@@ -11,7 +11,7 @@ This is a simple Discord bot written in Python that utilizes the `discord` libra
 ## Getting Started
 1. Make sure you have created a Discord bot and obtained the bot token. If you haven't done so, follow [this post](https://www.writebots.com/discord-bot-token/) to create a bot and retrieve the token.
 2. Set the bot token as an environment variable named `DISCORD_TOKEN`. You can export the variable in your shell or set it in your preferred development environment.
-3. Run it by executing `main.py`
+3. Run it by executing [main.py](./source/main.py)
 
 ## Code Explanation
 ### Importing Required Libraries
@@ -53,7 +53,7 @@ Finally, the bot is run by calling `client.run(TOKEN)`.
 
 ## Including further functionalities
 
-You can modify and extend this `handle_response` function at `responses.py` to include additional message patterns and responses based on your desired bot behavior.
+You can modify and extend this `handle_response` function at [responses.py](./source/responses.py) to include additional message patterns and responses based on your desired bot behavior.
 
 
 
