@@ -37,6 +37,6 @@ def github_payload():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=80)
-#    from waitress import serve
-#    serve(app, host="0.0.0.0", port=80)
+    # app.run(host="0.0.0.0", port=80)
+    from waitress import serve
+    serve(app, host="0.0.0.0", port=80)
