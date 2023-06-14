@@ -19,7 +19,7 @@ class MyClient(discord.Client):
         await self.tree.sync(guild=MY_GUILD)
 
 
-intents = discord.Intents.default()
+intents = discord.Intents.all()
 client = MyClient(intents=intents)
 
 
@@ -30,19 +30,19 @@ def run_discord_bot():
 
     @client.tree.command()
     async def ping(interaction: discord.Interaction):
-        await interaction.response.send_message("pong")
+        await interaction.channel.send("pong")
 
     @client.tree.command()
     async def ola(interaction: discord.Interaction):
         """Diz Olá!"""
-        await interaction.response.send_message(f'Olá, {interaction.user.mention}')
+        await interaction.channel.send(f'Olá, {interaction.user.mention}')
 
     @client.tree.command()
     @app_commands.rename(text_to_send='texto')
     @app_commands.describe(text_to_send='Texto para enviar para o canal.')
     async def enviar(interaction: discord.Interaction, text_to_send: str):
         """Envia texto para o canal."""
-        await interaction.response.send_message(text_to_send)
+        await interaction.channel.send(text_to_send)
 
     ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
