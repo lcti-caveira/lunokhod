@@ -53,7 +53,9 @@ Finally, the bot is run by calling `client.run(TOKEN)`.
 
 ## Including further functionalities
 
-You can modify and extend this `handle_response` function at [responses.py](./source/responses.py) to include additional message patterns and responses based on your desired bot behavior.
+You can add new basic messages or edit old ones in the commands.json file.
+
+You can also modify and extend this `handle_response` function at [responses.py](./source/responses.py) to include additional message patterns and responses based on your desired bot behavior.
 
 
 
