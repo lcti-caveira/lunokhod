@@ -5,8 +5,8 @@ import os
 def handle_response(message) -> str:
     print(f'Handling {message}')
     p_message = message.lower()
-    if p_message[0] == '!':
-        commands = get_simplecommands("commands.json")
+    if p_message[0] == '/':
+        commands = get_simplecommands(os.environ.get("DISCORD_COMMANDS", "bot_commands.json"))
         if p_message in commands.keys():
             return commands[p_message]
         return "Sorry, I didn't understand the command. Check if there's any misspelling!"
