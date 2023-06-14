@@ -5,7 +5,7 @@ import responses
 import os
 
 TOKEN = os.environ['DISCORD_TOKEN']
-MY_GUILD = discord.Object(id=1102693205662773258)  # ID do servidor LCTI
+MY_GUILD = discord.Object(id=703030680321392680)  # ID do servidor LCTI
 
 
 class MyClient(discord.Client):
