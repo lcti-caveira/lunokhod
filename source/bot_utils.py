@@ -4,7 +4,7 @@ import asyncio
 
 async def take_vote(interaction: discord.Interaction, question: str, vote_time, min_voters) -> bool:
     """
-    take_vote(ctx, question:str) - Collects votes
+    take_vote(interaction: discord.Interaction, question:str, vote_time, min_voters) - Collects votes
     interaction: pass from command function
     question: what to ask
     vote_time: minimum vote time

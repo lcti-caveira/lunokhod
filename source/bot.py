@@ -4,9 +4,27 @@ import discord.ext
 import json
 from bot_utils import *
 import os
+import random
 
 TOKEN = os.environ['DISCORD_TOKEN']
 MY_GUILD = discord.Object(id=1102693205662773258)  # ID do servidor LCTI
+
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+with open(os.path.join(ROOT_DIR, 'config.json'), 'r') as json_file:
+    config = json.load(json_file)
+
+with open(os.path.join(ROOT_DIR, 'status.json'), 'r', encoding='utf-8') as file:
+    statuses = json.load(file)
+
+MUTE_VOTE_TIME = config["MUTE_VOTE_TIME"]
+MIN_MUTE_VOTERS = config["MIN_MUTE_VOTERS"]  # should be 3
+MUTE_TIME = config["MUTE_TIME"]  # 10 mins
+
+muting_users = []
+muted_users = []
+
+STATUS_LOOP = config["STATUS_LOOP"]
 
 
 class MyClient(discord.Client):
@@ -27,34 +45,24 @@ def run_discord_bot():
     @client.event
     async def on_ready():
         print(f'{client.user} is now running!')
+        # await asyncio.sleep(300)
+        client.loop.create_task(status_loop())
 
     @client.tree.command()
     async def ping(interaction: discord.Interaction):
-        await interaction.channel.send("pong")
+        await interaction.response.send_message("pong")
 
     @client.tree.command()
     async def ola(interaction: discord.Interaction):
         """Diz Olá!"""
-        await interaction.channel.send(f'Olá, {interaction.user.mention}')
+        await interaction.response.send_message(f'Olá, {interaction.user.mention}')
 
     @client.tree.command()
     @app_commands.rename(text_to_send='texto')
     @app_commands.describe(text_to_send='Texto para enviar para o canal.')
     async def enviar(interaction: discord.Interaction, text_to_send: str):
         """Envia texto para o canal."""
-        await interaction.channel.send(text_to_send)
-
-    ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-
-    with open(os.path.join(ROOT_DIR, 'config.json'), 'r') as json_file:
-        config = json.load(json_file)
-
-    MUTE_VOTE_TIME = config["MUTE_VOTE_TIME"]
-    MIN_MUTE_VOTERS = config["MIN_MUTE_VOTERS"]  # should be 3
-    MUTE_TIME = config["MUTE_TIME"]  # 10 mins
-
-    muting_users = []
-    muted_users = []
+        await interaction.response.send_message(text_to_send)
 
     @client.tree.command()
     @app_commands.rename(target_user='usuário')
@@ -62,19 +70,19 @@ def run_discord_bot():
     async def mute(interaction: discord.Interaction, target_user: discord.Member):
         """Inicia uma votação para mutar um usuário."""
         if target_user in muting_users:
-            await interaction.channel.send(
+            await interaction.response.send_message(
                 f'Já há uma votação em andamento para mutar o usuário {target_user.mention}!')
             return
         elif target_user in muted_users:
-            await interaction.channel.send(f'Usuário {target_user.mention} já está mutado!')
+            await interaction.response.send_message(f'Usuário {target_user.mention} já está mutado!')
             return
 
-        await interaction.channel.send(f'Uma votação para mutar o usuário {target_user.mention} foi iniciada.')
+        await interaction.response.send_message(f'Uma votação para mutar o usuário {target_user.mention} foi iniciada.')
         muting_users.append(target_user)
 
         vote_passed = await take_vote(interaction,
-                                      f'Mute {target_user.mention}?\n⚠ NOTE: Can\'t mute users with an equal or '
-                                      f'higher role.',
+                                      f'Mutar {target_user.mention}?\n⚠ INFO: Não posso mutar usuários com uma '
+                                      f'role maior que a minha.',
                                       MUTE_VOTE_TIME, MIN_MUTE_VOTERS)
         muting_users.remove(target_user)
 
@@ -82,8 +90,10 @@ def run_discord_bot():
             try:
                 # Add to muted_users
                 muted_users.append(target_user)
-                # add temp. role for mute, edit role position to take precedence over other roles
-                muted_role = await interaction.guild.create_role(name="Muted")
+
+                # add temporary role for mute, edit role position to take precedence over other roles
+                # TODO: display_icon='😶' if the discord server has enough boosts
+                muted_role = await interaction.guild.create_role(name="Muted", colour=discord.Colour.darker_grey())
                 await muted_role.edit(position=target_user.top_role.position + 1)
 
                 # change channel permissions for new role
@@ -105,7 +115,15 @@ def run_discord_bot():
                 # Remove from muted_users
                 muted_users.remove(target_user)
             except discord.ext.commands.errors.CommandInvokeError:
-                # await error_admin_targeted(ctx)
                 muted_users.remove(target_user)
+
+    async def status_loop():
+        while True:
+            status = random.choice(statuses)
+            await client.change_presence(
+                activity=discord.Game(
+                    name=status.format(len(client.guilds)))
+            )
+            await asyncio.sleep(STATUS_LOOP)
 
     client.run(TOKEN)

@@ -1,3 +1,5 @@
+# unused code, left for reference
+
 def handle_response(message) -> str:
     print(f'Handling {message}')
     p_message = message.lower()
