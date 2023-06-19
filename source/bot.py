@@ -107,7 +107,7 @@ def run_discord_bot():
                 # Give role to member
                 await target_user.add_roles(muted_role)
                 await interaction.channel.send(
-                    "**{0}, a maioria decidiu que você deveria ser mutado.** Te vejo em {1} minutos!".format(
+                    "**{0}, a maioria decidiu que você deveria ser mutado...** Te vejo em {1} minutos!".format(
                         target_user.mention, int(MUTE_TIME / 60)))
                 await asyncio.sleep(MUTE_TIME)
                 await muted_role.delete()
