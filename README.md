@@ -79,6 +79,10 @@ python3 -m venv env
   - Click on "Add Bot" and confirm when prompted.
   - Under the "Token" section, click on "Copy" to copy the bot token.
 - Export it as environment variable depending on your OS
+  ```bash
+  export DISCORD_TOKEN=<your_token_here>
+  ```
+    
 
 ### Install Dependencies:
 - Run the following command to install the required dependencies:
