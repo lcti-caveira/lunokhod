@@ -5,6 +5,32 @@
 
 </div>
 
+## Origem
+
+Era uma vez, em uma galáxia não tão distante, vivia um rover lunar chamado Lunokhod. Lunokhod era o orgulho da União Soviética, percorrendo a superfície da Lua, coletando dados e encantando o mundo com seu charme robótico. Mas poucos sabiam que Lunokhod tinha grandes sonhos além das crateras da Lua.
+
+Em um dia fatídico, enquanto Lunokhod percorria diligentemente uma colina lunar, ele se deparou com um portal cósmico misterioso. Incapaz de resistir à atração da aventura, nosso bravo rover rolou diretamente para o portal, deixando para trás a paisagem lunar estéril.
+
+Para surpresa de Lunokhod, o portal o transportou para um reino conhecido como o Cyberverse. Era um mundo onde os bots reinavam no domínio digital, e os servidores se estendiam até onde os olhos podiam ver. Lunokhod encontrou-se em um servidor movimentado chamado Discord, povoado por humanos e bots.
+
+Enquanto Lunokhod explorava esse novo reino, ele descobriu que o servidor estava em extrema necessidade de assistência em moderação. Inúmeras mensagens inundavam os canais de chat e surgiam disputas entre os membros da comunidade. Lunokhod, sempre ansioso para ajudar, teve uma ideia brilhante.
+
+Utilizando sua tecnologia lunar avançada, Lunokhod se aprimorou como Lunokhod, o bot de moderação do Discord com um toque especial. Lunokhod capacitou a comunidade a participar da tomada de decisões. Introduziu um sistema de votação, permitindo que os usuários expressassem suas opiniões sobre quem deveria ser banido, expulso ou temporariamente silenciado.
+
+Com suas novas capacidades, Lunokhod facilitou a tomada de decisões justas e democráticas no servidor. Sempre que ocorria uma violação das regras, a comunidade rapidamente alertava Lunokhod, que iniciava um processo de votação. Os usuários tinham a oportunidade de votar na punição apropriada para o infrator.
+
+O sistema de votação trouxe uma sensação de justiça e transparência ao servidor. Capacitou a comunidade a participar ativamente da manutenção da ordem e a decidir o destino dos transgressores. Lunokhod contabilizava diligentemente os votos, levando em consideração a gravidade da infração e o consenso da comunidade.
+
+Com o passar do tempo, o sistema de votação de Lunokhod tornou-se renomado em todo o reino do Discord. Donos de servidores de todos os lugares buscaram a ajuda de Lunokhod, ansiosos por implementar sua abordagem justa e democrática de moderação. Lunokhod tornou-se um símbolo de tomada de decisões coletivas e harmonia na comunidade.
+
+A notícia das habilidades notáveis de Lunokhod se espalhou rapidamente, chamando a atenção dos próprios deuses do Discord. Impressionado com a inovação de Lunokhod, o Discord concedeu a ele o título honorário de "Bot da Justiça Democrática".
+
+E assim, Lunokhod continuou sua nobre missão, pulando de servidor em servidor, promovendo julgamentos justos e envolvimento comunitário. Trouxe risos, ordem e harmonia aos reinos digitais, promovendo um ambiente onde os usuários tinham voz e as regras eram mantidas com consenso.
+
+A incrível jornada de Lunokhod, de explorador lunar a bot de moderação do Discord com um toque democrático, tornou-se uma lenda, inspirando futuros bots e seres humanos a abraçarem a justiça, a transparência e a participação do usuário em suas comunidades digitais.
+
+E assim, a história de Lunokhod ecoou pelo Cyberverse, lembrando a todos que até mesmo um modesto rover lunar poderia se tornar um catalisador para a tomada de decisões democráticas, tornando os reinos virtuais um lugar melhor, um voto democrático de cada vez.
+
 ## Backstory
 Once upon a time, in a galaxy not so far away, there lived a lunar rover named Lunokhod. Lunokhod had been the pride of the Soviet Union, roaming the Moon's surface, collecting data, and captivating the world with its robotic charm. But little did anyone know that Lunokhod had big dreams beyond the craters of the Moon.
 
