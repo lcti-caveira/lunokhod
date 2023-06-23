@@ -6,7 +6,7 @@ import os
 import random
 
 TOKEN = os.environ['DISCORD_TOKEN']
-MY_GUILD = discord.Object(id=1102693205662773258)  # ID do servidor LCTI
+MY_GUILD = discord.Object(id=703030680321392680)  # ID do servidor LCTI
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -138,20 +138,24 @@ def run_discord_bot():
 
         if target_user in kicking_users:
             # noinspection PyUnresolvedReferences
-            await interaction.response.send_message(f'Já existe uma votação para kickar `{target_user}`!')
+            await interaction.response.send_message(f'Já existe uma votação em andamento para kickar {target_user.mention}!')
             return
 
+        # noinspection PyUnresolvedReferences
+        await interaction.response.send_message(f'Uma votação para kickar o usuário {target_user.mention}'
+                                                f' foi iniciada.')
         # add to kicking_users
         kicking_users.append(target_user)
 
-        vote_passed = await take_vote(interaction, f'Kickar `{target_user}`?\n⚠ INFO: Não posso kickar usuários com '
-                                                   f'uma role maior ou igual a minha.', KICK_VOTE_TIME, MIN_KICK_VOTERS)
+        vote_passed = await take_vote(interaction, f'Kickar {target_user.mention}?\n⚠ INFO: Não posso kickar '
+                                                   f'usuários com uma role maior ou igual a minha.',
+                                      KICK_VOTE_TIME, MIN_KICK_VOTERS)
 
         if vote_passed:
             try:
                 await interaction.guild.kick(target_user, reason='Votado para ser kickado')
                 # noinspection PyUnresolvedReferences
-                await interaction.response.send_message(f'👢 Kickado: `{target_user}`.')
+                await interaction.response.send_message(f'👢 Kickado: {target_user.mention}.')
             except discord.ext.commands.errors.CommandInvokeError:
                 # noinspection PyUnresolvedReferences
                 await interaction.response.send_message('Ops! Algo de errado aconteceu...')
@@ -166,21 +170,26 @@ def run_discord_bot():
 
         if target_user in banning_users:
             # noinspection PyUnresolvedReferences
-            await interaction.response.send_message(f'Já existe uma votação para banir `{target_user}`!')
+            await interaction.response.send_message(f'Já existe uma votação em andamento para banir {target_user.mention}!')
             return
 
+        # noinspection PyUnresolvedReferences
+        await interaction.response.send_message(f'Uma votação para banir o usuário {target_user.mention}'
+                                                f' foi iniciada.')
         # add to banning_users
         banning_users.append(target_user)
 
-        vote_passed = await take_vote(interaction, 'Banir `{}`?\n⚠ INFO:Não posso banir usuários com role igual ou '
-                                                   'maior que a minha.'.format(target_user), BAN_VOTE_TIME,
+        vote_passed = await take_vote(interaction,
+                                      f'Banir {target_user.mention}?\n⚠ INFO:Não posso banir '
+                                      f'usuários com role igual ou maior que a minha.',
+                                      BAN_VOTE_TIME,
                                       MIN_BAN_VOTERS)
 
         if vote_passed:
             try:
                 await interaction.guild.ban(target_user, reason='Votado para ser banido')
                 # noinspection PyUnresolvedReferences
-                await interaction.response.send_message(f'🦀🦀 `{target_user.name}` SE FOI 🦀🦀')
+                await interaction.response.send_message(f'🦀🦀 {target_user.mention} SE FOI 🦀🦀')
             except discord.ext.commands.errors.CommandInvokeError:
                 # noinspection PyUnresolvedReferences
                 await interaction.response.send_message('Ops! Algo de errado aconteceu...')
