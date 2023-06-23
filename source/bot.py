@@ -75,7 +75,7 @@ def run_discord_bot():
         # noinspection PyUnresolvedReferences
         await interaction.response.send_message(text_to_send)
 
-    @client.tree.command()
+    @client.tree.command(name='vote-mute')
     @app_commands.rename(target_user='usuário')
     @app_commands.describe(target_user='Usuário que passará por votação para ser mutado.')
     async def mute(interaction: discord.Interaction, target_user: discord.Member):
@@ -130,7 +130,7 @@ def run_discord_bot():
             except discord.ext.commands.errors.CommandInvokeError:
                 muted_users.remove(target_user)
 
-    @client.tree.command()
+    @client.tree.command(name='vote-kick')
     @app_commands.rename(target_user='usuário')
     @app_commands.describe(target_user='Usuário que passará por votação para ser kickado.')
     async def kick(interaction: discord.Interaction, target_user: discord.Member):
@@ -158,7 +158,7 @@ def run_discord_bot():
 
         kicking_users.remove(target_user)
 
-    @client.tree.command()
+    @client.tree.command(name='vote-ban')
     @app_commands.rename(target_user='usuário')
     @app_commands.describe(target_user='Usuário que passará por votação para ser banido.')
     async def ban(interaction: discord.Interaction, target_user: discord.Member):
