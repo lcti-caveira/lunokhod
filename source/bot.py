@@ -1,6 +1,5 @@
 from discord import app_commands
 import discord.ext
-import json
 from bot_utils import *
 import os
 import random
@@ -138,7 +137,8 @@ def run_discord_bot():
 
         if target_user in kicking_users:
             # noinspection PyUnresolvedReferences
-            await interaction.response.send_message(f'Já existe uma votação em andamento para kickar {target_user.mention}!')
+            await interaction.response.send_message(f'Já existe uma votação em andamento para '
+                                                    f'kickar {target_user.mention}!')
             return
 
         # noinspection PyUnresolvedReferences
@@ -170,7 +170,8 @@ def run_discord_bot():
 
         if target_user in banning_users:
             # noinspection PyUnresolvedReferences
-            await interaction.response.send_message(f'Já existe uma votação em andamento para banir {target_user.mention}!')
+            await interaction.response.send_message(f'Já existe uma votação em andamento para '
+                                                    f'banir {target_user.mention}!')
             return
 
         # noinspection PyUnresolvedReferences
@@ -195,6 +196,20 @@ def run_discord_bot():
                 await interaction.response.send_message('Ops! Algo de errado aconteceu...')
 
         banning_users.remove(target_user)
+
+    @client.tree.command(name='gatinho')
+    async def cat(interaction: discord.Interaction):
+        """Responde com um gatinho aleatório."""
+        api_url = 'https://api.thecatapi.com/v1/images/search'
+        msg = f'{interaction.user.mention}, aqui está o seu gatinho aleatório:'
+        await get_random_animal(interaction, api_url, msg)
+
+    @client.tree.command(name='doguinho')
+    async def dog(interaction: discord.Interaction):
+        """Responde com um doguinho aleatório."""
+        api_url = 'https://api.thedogapi.com/v1/images/search'
+        msg = f'{interaction.user.mention}, aqui está o seu doguinho aleatório:'
+        await get_random_animal(interaction, api_url, msg)
 
     async def status_loop():
         while True:
