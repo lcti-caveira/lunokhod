@@ -35,9 +35,8 @@ This code serves as a foundation for a Discord bot with features related to voti
 
 ## Prerequisites
 - Python 3.x installed on your system.
-- The `discord` library installed. You can install it using `pip install discord`.
 - (Optional) [Install PyCharm](https://www.jetbrains.com/help/pycharm/installation-guide.html#toolbox)
-  - This will ease the below process as the tool creates the virtual env and the token can be set as environment variable at it directly
+  - This will ease the below process as the tool creates the virtual env and the token can be set as an environment variable directly at it
 
 ## Running locally 
 
