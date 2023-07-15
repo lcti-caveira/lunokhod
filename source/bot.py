@@ -25,11 +25,13 @@ MIN_KICK_VOTERS = config["MIN_KICK_VOTERS"]
 MIN_BAN_VOTERS = config["MIN_BAN_VOTERS"]
 
 MUTE_TIME = config["MUTE_TIME"]
+ANONYMOUS_MESSAGES_MUTE_TIME = config["ANONYMOUS_MESSAGES_MUTE_TIME"]
 
 muting_users = []
 kicking_users = []
 banning_users = []
 muted_users = []
+anonymous_messages_users = []
 
 STATUS_LOOP = config["STATUS_LOOP"]
 
@@ -79,9 +81,19 @@ def run_discord_bot():
     @app_commands.describe(text_to_send='Texto para enviar para o canal de moderadores de forma anônima.')
     async def anonimo(interaction: discord.Interaction, text_to_send: str):
         """Envia texto para canal de moderadores de forma anônima."""
-        channel_name = '🥀mensagens-anonimas'
+        if discord.Interaction.user in anonymous_messages_users:
+            # noinspection PyUnresolvedReferences
+            await interaction.response.send_message(
+                f'Você já enviou uma mensagem anônima nas últimas 3 horas... Aguarde e tente novamente!',
+                ephemeral=True)
+            return
+
         # noinspection PyUnresolvedReferences
-        await interaction.response.send_message(':thumbsup:', ephemeral=True)
+        await interaction.response.send_message('Mensagem anônima enviada aos moderadores 🕵️. Aguarde 3 '
+                                                'horas para enviar outra.', ephemeral=True)
+
+        anonymous_messages_users.append(discord.Interaction.user)
+        channel_name = '🥀mensagens-anonimas'
         existing_channel = discord.utils.get(interaction.guild.channels, name=channel_name)
         if not existing_channel:
             print(f'Creating a new channel: {channel_name}')
@@ -89,6 +101,10 @@ def run_discord_bot():
 
         channel = client.get_channel(discord.utils.get(interaction.guild.channels, name=channel_name).id)
         await channel.send(text_to_send)
+
+        await asyncio.sleep(ANONYMOUS_MESSAGES_MUTE_TIME)
+        # Remove from muted_users
+        anonymous_messages_users.remove(discord.Interaction.user)
 
     @client.tree.command(name='vote-mute')
     @app_commands.rename(target_user='usuário')
