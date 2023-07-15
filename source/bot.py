@@ -86,8 +86,8 @@ def run_discord_bot():
             print(f'Creating a new channel: {channel_name}')
             await interaction.guild.create_text_channel(name=channel_name)
 
-        # noinspection PyUnresolvedReferences
-        await interaction.response.send_message(text_to_send)
+        channel = client.get_channel(discord.utils.get(interaction.guild.channels, name=channel_name).id)
+        await channel.send(text_to_send)
 
     @client.tree.command(name='vote-mute')
     @app_commands.rename(target_user='usuário')
