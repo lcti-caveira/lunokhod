@@ -80,7 +80,8 @@ def run_discord_bot():
     async def anonimo(interaction: discord.Interaction, text_to_send: str):
         """Envia texto para canal de moderadores de forma anônima."""
         channel_name = '🥀mensagens-anonimas'
-        await interaction.channel.send(":thumbsup:")
+        # noinspection PyUnresolvedReferences
+        await interaction.response.send_message(':thumbsup:', ephemeral=True)
         existing_channel = discord.utils.get(interaction.guild.channels, name=channel_name)
         if not existing_channel:
             print(f'Creating a new channel: {channel_name}')
