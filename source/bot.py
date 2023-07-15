@@ -34,7 +34,7 @@ muted_users = []
 STATUS_LOOP = config["STATUS_LOOP"]
 
 
-class MyClient(discord.Client):
+class Client(discord.Client):
     def __init__(self, *, intents_local: discord.Intents):
         super().__init__(intents=intents_local)
         self.tree = app_commands.CommandTree(self)
@@ -45,7 +45,7 @@ class MyClient(discord.Client):
 
 
 intents = discord.Intents.all()
-client = MyClient(intents_local=intents)
+client = Client(intents_local=intents)
 
 
 def run_discord_bot():
@@ -71,6 +71,20 @@ def run_discord_bot():
     @app_commands.describe(text_to_send='Texto para enviar para o canal.')
     async def enviar(interaction: discord.Interaction, text_to_send: str):
         """Envia texto para o canal."""
+        # noinspection PyUnresolvedReferences
+        await interaction.response.send_message(text_to_send)
+
+    @client.tree.command()
+    @app_commands.rename(text_to_send='texto')
+    @app_commands.describe(text_to_send='Texto para enviar para o canal de moderadores de forma anônima.')
+    async def anonimo(interaction: discord.Interaction, text_to_send: str):
+        """Envia texto para canal de moderadores de forma anônima."""
+        await interaction.channel.send(":thumbsup:")
+        existing_channel = discord.utils.get(interaction.guild.channels, name='chat-camaradas-legais')
+        if not existing_channel:
+            print(f'Creating a new channel: chat-camaradas-legais')
+            await interaction.guild.create_text_channel(name='chat-camaradas-legais')
+
         # noinspection PyUnresolvedReferences
         await interaction.response.send_message(text_to_send)
 
