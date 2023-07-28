@@ -253,7 +253,7 @@ def run_discord_bot():
         # noinspection PyUnresolvedReferences
         await interaction.response.send_message(f'Nome do servidor: {interaction.guild.name}\n'
                                                 f'Número de membros: {interaction.guild.member_count}\n'
-                                                f'Link para o notion: {NOTION_URL}')
+                                                f'Apoie esse bot e outras iniciativas do LCTI: {NOTION_URL}')
 
     async def status_loop():
         while True:
