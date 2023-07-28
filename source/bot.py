@@ -1,8 +1,9 @@
-from discord import app_commands
-import discord.ext
-from bot_utils import *
 import os
 import random
+
+import discord.ext
+from bot_utils import *
+from discord import app_commands
 
 TOKEN = os.environ['DISCORD_TOKEN']
 MY_GUILD = discord.Object(id=1102693205662773258)  # ID do servidor LCTI
@@ -26,6 +27,7 @@ MIN_BAN_VOTERS = config["MIN_BAN_VOTERS"]
 
 MUTE_TIME = config["MUTE_TIME"]
 ANONYMOUS_MESSAGES_MUTE_TIME = config["ANONYMOUS_MESSAGES_MUTE_TIME"]
+NOTION_URL = config["NOTION_URL"]
 
 muting_users = []
 kicking_users = []
@@ -94,12 +96,14 @@ def run_discord_bot():
 
         anonymous_messages_users.append(discord.Interaction.user)
         channel_name = '🥀mensagens-anonimas'
-        existing_channel = discord.utils.get(interaction.guild.channels, name=channel_name)
+        existing_channel = discord.utils.get(
+            interaction.guild.channels, name=channel_name)
         if not existing_channel:
             print(f'Creating a new channel: {channel_name}')
             await interaction.guild.create_text_channel(name=channel_name)
 
-        channel = client.get_channel(discord.utils.get(interaction.guild.channels, name=channel_name).id)
+        channel = client.get_channel(discord.utils.get(
+            interaction.guild.channels, name=channel_name).id)
         await channel.send(text_to_send)
 
         await asyncio.sleep(ANONYMOUS_MESSAGES_MUTE_TIME)
@@ -242,6 +246,14 @@ def run_discord_bot():
         api_url = 'https://api.thedogapi.com/v1/images/search'
         msg = f'{interaction.user.mention}, aqui está o seu doguinho aleatório:'
         await get_random_animal(interaction, api_url, msg)
+
+    @client.tree.command(name='infos', description='Responde com informações do servidor.')
+    async def infos(interaction: discord.Interaction):
+        """Responde com informações do servidor."""
+        # noinspection PyUnresolvedReferences
+        await interaction.response.send_message(f'Nome do servidor: {interaction.guild.name}\n'
+                                                f'Número de membros: {interaction.guild.member_count}\n'
+                                                f'Apoie esse bot e outras iniciativas do LCTI: {NOTION_URL}')
 
     async def status_loop():
         while True:
